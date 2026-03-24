@@ -1,0 +1,22 @@
+title: "CS Perspectives"
+description: "Faculty writing from Seattle University's Department of Computer Science"
+url: ""
+baseurl: ""
+permalink: /:year/:month/:day/:title/
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Collections
+collections:
+  posts:
+    output: true
+
+# Exclude
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

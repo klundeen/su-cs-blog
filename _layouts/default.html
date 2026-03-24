@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+  <div class="utility-bar">
+    <div class="container">
+      <a href="https://www.seattleu.edu/">Seattle University</a>
+      <a href="https://www.seattleu.edu/science-engineering/">College of Science &amp; Engineering</a>
+      <a href="https://www.seattleu.edu/science-engineering/academic-departments/department-of-computer-science/">Computer Science</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-brand" href="{{ '/' | relative_url }}">
+        <span class="university-name">Seattle University</span>
+        <span class="blog-name">CS Perspectives</span>
+      </a>
+      <nav class="site-nav">
+        <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Posts</a>
+        <a href="{{ '/roadmap' | relative_url }}" class="{% if page.url == '/roadmap/' %}active{% endif %}">Roadmap</a>
+        <a href="{{ '/about' | relative_url }}" class="{% if page.url == '/about/' %}active{% endif %}">About</a>
+      </nav>
+    </div>
+  </header>
+
+  {{ content }}
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="university-name">Seattle University</div>
+          <p>Department of Computer Science<br>
+          College of Science &amp; Engineering<br>
+          901 12th Avenue, Seattle, WA 98122</p>
+        </div>
+        <div>
+          <h4>Department</h4>
+          <ul class="footer-links">
+            <li><a href="https://www.seattleu.edu/science-engineering/academic-departments/department-of-computer-science/">CS Home</a></li>
+            <li><a href="https://www.seattleu.edu/academics/all-programs/computer-science-ms/">Graduate Programs</a></li>
+            <li><a href="https://www.seattleu.edu/academics/all-programs/computer-science-ba-bs/">Undergraduate Programs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>University</h4>
+          <ul class="footer-links">
+            <li><a href="https://www.seattleu.edu/newsroom/">News</a></li>
+            <li><a href="https://events.seattleu.edu/">Events</a></li>
+            <li><a href="https://www.seattleu.edu/admissions-aid/">Admissions</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; {{ 'now' | date: '%Y' }} Seattle University</span>
+        <span>
+          <a href="https://www.seattleu.edu/policies-regulations/online-privacy-statement/">Privacy</a>
+          <a href="https://www.seattleu.edu/policies-regulations/accessibility/">Accessibility</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
