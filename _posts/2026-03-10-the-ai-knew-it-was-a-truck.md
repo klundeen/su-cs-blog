@@ -25,9 +25,9 @@ I didn't notice. A few minutes later, the classifier returned class index 9. My 
 
 The neural net that classified the image knew it was a truck. The neural net that wrote the code didn't.
 
-![PyCharm's AI autocomplete fills in the CIFAR-10 class list — nine classes, no truck. Note the "Code Completion → Insert Inline Proposal" tooltip at the bottom.](/assets/images/bug-introduced.jpg)
+![PyCharm's AI autocomplete fills in the CIFAR-10 class list — nine classes, no truck. Note the "Code Completion → Insert Inline Proposal" tooltip at the bottom.]({{ site.baseurl }}/assets/images/bug-introduced.jpg)
 
-![A few minutes later: back in the editor, staring at lines 62–70. Airplane, automobile, bird, cat, deer, dog, frog, horse, ship. Count them. Nine.](/assets/images/where-is-truck.jpg)
+![A few minutes later: back in the editor, staring at lines 62–70. Airplane, automobile, bird, cat, deer, dog, frog, horse, ship. Count them. Nine.]({{ site.baseurl }}/assets/images/where-is-truck.jpg)
 
 It tickled me. And it turned into a way of thinking about a much bigger question: how do we teach students to be the one who knows?
 
@@ -99,7 +99,7 @@ Default is "no AI," opened when it serves learning. The syllabus frames it: the 
 
 Here's the thing I don't have an answer for.
 
-![A gradebook from one of my courses. The "Total" column reads A, A-, A, A-, A, A, A, A. The callout says it: "No differentiation!"](/assets/images/column-of-as.jpg)
+![A gradebook from one of my courses. The "Total" column reads A, A-, A, A-, A, A, A, A. The callout says it: "No differentiation!"]({{ site.baseurl }}/assets/images/column-of-as.jpg)
 
 If students are more productive with AI — and they are — and they're turning in better work — and they are — then grades go up. I'm looking at a column of A's in some of my courses. Is that grade inflation? Or is it the new baseline? If a carpenter gets better tools, we don't give them a worse grade for using them. But if the tools are doing the carpentry...
 
