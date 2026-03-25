@@ -27,7 +27,6 @@ The neural net that classified the image knew it was a truck. The neural net tha
 
 ![PyCharm's AI autocomplete fills in the CIFAR-10 class list — nine classes, no truck. Note the "Code Completion → Insert Inline Proposal" tooltip at the bottom.]({{ site.baseurl }}/assets/images/bug-introduced.jpg)
 
-![A few minutes later: back in the editor, staring at lines 62–70. Airplane, automobile, bird, cat, deer, dog, frog, horse, ship. Count them. Nine.]({{ site.baseurl }}/assets/images/where-is-truck.jpg)
 
 It tickled me. And it turned into a way of thinking about a much bigger question: how do we teach students to be the one who knows?
 
