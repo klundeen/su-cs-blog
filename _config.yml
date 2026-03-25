@@ -10,11 +10,6 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# Collections
-collections:
-  posts:
-    output: true
-
 # Exclude
 exclude:
   - README.md

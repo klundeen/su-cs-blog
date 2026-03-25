@@ -1,142 +1,126 @@
 ---
 layout: post
-title: "From ℵ₀ to ℵ₁"
-subtitle: "Is the gap between AI and human cognition a difference in degree or a difference in kind?"
-date: 2026-03-20
+title: "The AI Knew It Was a Truck. The Other AI Didn't."
+subtitle: "What happened when I stopped banning AI and started using it"
+date: 2026-03-10
 author: Kevin Lundeen
 author_title: "Teaching Professor, Department of Computer Science"
 ---
 
-I had a conversation with Claude the other night that I can't stop thinking about. It started with a simple question about LLM scaling — how big do these things need to be? — and ended up somewhere I didn't expect.
+A year ago, I thought LLMs were an annoying flea. They made it easier for my students to cheat. I banned all AI use in my courses. If you want to learn how to tie your shoes, don't buy velcro ones!
 
-Could be naive, but it seems worth thinking about.
+Then a few things happened in quick succession. My boss at OneTouchEMR — my consulting gig — went all gaga over AI, the way C-suite people do. So we built some AI systems into our medical records product. Meanwhile, I was tapped to build the online AI Systems course, ARIN 5360, for Seattle U's new MSAI program. I picked Claude as my primary tool because Anthropic claims HIPAA compliance, which matters for OneTouchEMR. With my subscription, I started using it for everything.
 
-[^cantor]: Georg Cantor proved in 1891 that some infinities are bigger than others. The reals are uncountably infinite (ℵ₁, aleph-one); the naturals are countably infinite (ℵ₀, aleph-null). The proof fits on a napkin and it broke mathematics. See any good analysis textbook, or Courant and Robbins, *What Is Mathematics?* (Oxford, 1941).
+And I mean everything. Consulting work. Course development. Lecture prep. Grading rubrics. Debugging. Writing. I used AI to help build the AI course, of course. And of course I would let the students use AI in careful ways in the course, too.
+
+Somewhere in there, I went from flea to enamored. This post is about what I've learned since.
 
 ---
 
-## Will they ever know everything?
+## The truck
 
-The scaling laws research[^scaling] found that LLM performance improves as a power law with both parameter count and training data, but with diminishing returns on each. The curves don't flatten completely in the ranges we've tested, but they're clearly bending. So I asked: is there some asymptotic convergence? Some point where more training doesn't matter?
+You may have heard this one. I was recording a lecture for ARIN 5360, live-coding a CNN image classifier on CIFAR-10.[^cifar] PyCharm's AI autocomplete offered to fill in the list of class names. I accepted. It produced nine. It left out "truck."
 
-Think of it like lossy compression.[^jpeg] A JPEG encodes a photograph at various quality levels. More bits gives you a better reconstruction, but doubling the file size doesn't double the quality. Parameters work similarly — they're not storing facts like a database. They're storing statistical relationships, the way a JPEG stores frequency coefficients rather than individual pixels.
+I didn't notice. A few minutes later, the classifier returned class index 9. My label list had no index 9. I had to debug it on camera, in front of my students.
 
-Here's where it gets interesting. There's a difference between *understanding* and *facts*. Understanding compresses well — once you grasp Newtonian mechanics, every new projectile problem is redundant. But the name of a beetle, where it was found, what it eats — that's essentially incompressible. Every fact is its own thing. You can't derive the name of a species from first principles.
+The neural net that classified the image knew it was a truck. The neural net that wrote the code didn't.
 
-So you'd hit a regime where the model has enough parameters to capture the patterns and reasoning structures — the framework — but runs out of room for the encyclopedia. It would understand entomology perfectly but not tell you about the specific beetle discovered on a Tuesday in 2847. This actually matches a real failure mode: I've watched Claude get the logic of an argument exactly right and hallucinate the citation. The relational knowledge compressed fine; the specific fact didn't survive.
+![PyCharm's AI autocomplete fills in the CIFAR-10 class list — nine classes, no truck. Note the "Code Completion → Insert Inline Proposal" tooltip at the bottom.]({{ site.baseurl }}/assets/images/bug-introduced.jpg)
 
-![A museum drawer of pinned beetle specimens. Each one is its own fact — unique, incompressible, irreducible to first principles. Understanding how beetles work compresses beautifully. Knowing which beetle this is does not.](https://upload.wikimedia.org/wikipedia/commons/a/af/Display_drawer_1a_%2817407586030%29.jpg)
-*"God has an inordinate fondness for beetles." — attributed to J.B.S. Haldane, probably apocryphal, definitely true. Photo: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Beetle_collections).*
 
-The practical answer is retrieval-augmented generation — don't memorize every beetle, learn how beetles work and look up the specific one when you need it. That's what we're building in my AI Systems course.[^rag]
+It tickled me. And it turned into a way of thinking about a much bigger question: how do we teach students to be the one who knows?
 
-But here's the question I can't shake: is there a convergence point for the *framework itself*? If there is, that's a bold claim about human thought — it would mean the structure of human reasoning is finite. A finite set of ways that causes relate to effects, that arguments get structured, that narratives unfold. At some parameter count you'd have a model that has essentially "learned thinking." After that, more parameters only buy you beetle storage.
+[^cifar]: CIFAR-10: 60,000 tiny images in 10 classes. The "hello world" of image classification. Krizhevsky, "[Learning Multiple Layers of Features from Tiny Images](https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf)," University of Toronto, 2009.
 
-[^scaling]: Kaplan et al., "[Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361)," *arXiv*, 2020; Hoffmann et al., "[Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556)" (the Chinchilla paper), *arXiv*, 2022. The Chinchilla work showed most large models were undertrained relative to their parameter count.
-[^jpeg]: This isn't just an analogy — it's surprisingly close to what's actually happening. JPEG applies a discrete cosine transform to decompose an image into frequency components, then quantizes the high-frequency coefficients (fine details) more aggressively than the low-frequency ones (broad structure). The result: you keep the overall shape and lose the texture. LLM training does something eerily similar — gradient descent on a cross-entropy loss preferentially encodes high-frequency patterns (common reasoning structures, grammatical rules) and lossy-encodes the long tail (specific facts, rare names, that one beetle). The analogy runs deep enough that some researchers have formally connected neural network generalization to rate-distortion theory from information theory. See Shwartz-Ziv and Tishby, "[Opening the Black Box of Deep Neural Networks via Information](https://arxiv.org/abs/1703.00810)," *arXiv*, 2017 — the information bottleneck paper that started a lot of this thinking.
-[^rag]: RAG: Retrieval-Augmented Generation. Don't try to know everything — learn how to think, then look things up. Lewis et al., "[Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)," *NeurIPS*, 2020.
+## A starting premise
 
-## AlphaGo converged. Language might not.
+Banning AI from our classrooms is like banning calculators from a math department (sometimes, yes!). But as a blanket policy, it's impractical, and it doesn't prepare students for the world they're about to enter. Our students will use these tools professionally on day one after graduation.
 
-AlphaZero — the version that learned Go purely from self-play — did reach a point where its improvement leveled off dramatically. Its Elo rating climbed steeply and then flattened into something that looks like an asymptote. And Go has a finite, deterministic rule set. There *is* a theoretically perfect player. So if convergence is possible anywhere, it's there. And it seems to have roughly converged.
+Steve Yegge says he's "10 to 20 — to even 100 — times as productive" with AI.[^yegge] That might be hyperbole, but even the conservative version is a big deal. And as Ryan Salva puts it: "I care less that the models are really good at producing the right result the first time. I care much more that there are validation steps in place so that it eventually gets the right answer."[^salva]
 
-Language is the messier version. The game board keeps expanding. The rules are fuzzy. New domains keep getting invented. You're asking whether a game with no fixed rules and an ever-growing board still has a learnable meta-strategy.
+That's the whole game. Not whether students use AI, but whether they can validate what it gives them.
 
-And then I realized: there's something one-dimensional about next-token prediction that might be the deeper problem. Not just "will it converge?" but "is convergence even the right frame?"
+And here's the thing Anil Dash wrote in the *Times* that I keep coming back to: in creative fields, LLMs take away the soulful parts and leave the drudgery. But in coding, they take away the drudgery and leave the soulful parts to you.[^dash] We're on the lucky side. Our students need to be, too.
 
-That's where Cantor[^cantor] came in.
+[^yegge]: Steve Yegge, "[Cheating Is All You Need](https://sourcegraph.com/blog/cheating-is-all-you-need)," Sourcegraph blog, 2023.
+[^salva]: Ryan Salva, VP of Product at GitHub, on the GitHub Copilot podcast, 2025.
+[^dash]: Anil Dash, "[What Do Coders Do After AI?](https://www.anildash.com/2026/03/13/coders-after-ai/)," *New York Times Magazine* (via anildash.com), 2026.
 
-## The bottleneck
+## The tier matters
 
-Next-token prediction is serial. One word, then the next, then the next. The transformer has attention — it can look at everything at once — and the training is beautifully parallelized. I teach parallel computing; I appreciate the elegance. But at inference time, generation is autoregressive.[^vaswani] One token. Then one more. The parallelism is in how the model *considers*. Not in how it *creates*.
+After the truck incident, I started seeing the same pattern across everything I teach. But the nature of the challenge — and the right teaching response — depends entirely on what tier of AI engagement your course sits at. This taxonomy matters, because one size doesn't fit all.[^tier]
 
-That's not an engineering constraint you can optimize away. Every internal state, no matter how rich the attention patterns, collapses into a probability distribution over the vocabulary for a single next token.
+**Build It** — In CPSC 5600 (Parallel Computing), students are learning the internals: attention mechanisms, GPU kernels, the infrastructure AI runs on. They need to understand tiling and warp divergence[^warp] and why shared memory exists. The AI can write a kernel that compiles. The student needs to know how it's leaving 90% of performance on the table. Traditional exams still work here, because the questions are about *understanding*, not output.
 
-Compare that to how I actually think about a problem. When I'm hosting a party at the farmhouse, I'm tracking three conversations, reading body language, noticing someone's glass is empty, remembering that two guests have a history, and thinking about when to bring out the next course. That's not sequential. That's a high-dimensional state I hold all at once and act from holistically.
+**Integrate It** — In ARIN 5360 (AI Systems), students are building RAG pipelines and retrieval systems. They're using AI components as building blocks. Assessment here is about process: commit history, design documents, the reasoning behind architectural choices. The truck story lives here — you need to understand the seams between components.
 
-Token prediction optimizes for *plausible continuation*. Thinking often asks *what's the shape of the whole thing?* Only one of those lives on a line.
+**Supervise It** — This is the tier that keeps us teachers up at night. In standard coding courses — 5001, 5042, 5510 — the AI can do the homework. Not "help with" — *do*. The student submits code, and it works, and the provenance is unknowable.[^laundering] The approach here is scaffolded in-class practice with proctored exams that ask about the homework. The subtle shift is less "write it" and more "evaluate, debug, and improve it."
 
-[^vaswani]: Vaswani et al., "[Attention Is All You Need](https://arxiv.org/abs/1706.03762)," *NeurIPS*, 2017. The transformer paper. The parallel attention was the innovation. The autoregressive generation is the bottleneck.
+**Use It** — In CPSC 5320 (Visual Analytics), using AI well *is* the assessment. Students generate visualizations, analyze datasets, iterate with AI tools. The question isn't whether they used AI — it's whether they caught the sawtooth-that-isn't-seasonality, whether they could tell plausible from correct. The skill is the verification.
 
-## The question Cantor answers
+The teaching approach has to match the tier. A no-AI exam makes sense in "Build It." A submit-your-AI-transcript assignment makes sense in "Use It." Applying the wrong approach to the wrong tier is how you get bad policy.
 
-Is the gap between what LLMs do and what human minds do a difference in *degree* — more parameters, more data, wait long enough — or a difference in *kind*, the way the real numbers are a fundamentally different size of infinity than the integers? You can't get from the naturals to the reals by adding more naturals. Is there an analogous barrier?
+[^tier]: I presented this taxonomy in a faculty talk in March 2026. The four tiers evolved from an earlier version with slightly different framing — the key insight is that the *relationship* between the student and the AI determines what good teaching looks like.
+[^warp]: Warp divergence: when threads in a GPU warp take different branches, the GPU executes both serially, killing parallelism. AI-generated kernels routinely ignore this.
+[^laundering]: This isn't hypothetical. A student once submitted work that I recognized as my own reference solution — they'd prompted an LLM with the assignment description and it gave them back something very close to what I'd written. They were honest about it when I asked. They didn't realize they were submitting my work back to me, laundered through an AI. The provenance problem runs in both directions.
 
-Cantor's diagonalization argument[^diagonal]: for any proposed listing of all the reals, you construct one that's not on the list by differing from the *n*th entry at the *n*th decimal place. The structure of what you're trying to capture exceeds any sequential enumeration.
+## Things I'm actually trying
 
-![Cantor's diagonal argument: take any proposed list of real numbers, read the diagonal digits, change each one, and you've constructed a number that can't be on the list. The reals are a bigger infinity than the naturals.]({{ site.baseurl }}/assets/images/cantor-diagonal.svg)
+Here's where I stop being philosophical and start being practical. These are concrete experiments, some tested, some planned.
 
-Maybe cognition has that property. For any sequential description of what a mind is doing, there's something that escapes it — not because you haven't described *enough*, but because sequential description is the wrong medium. The way insight arrives whole. The way you suddenly see the shape of a proof. Maybe those are the diagonalization — the thing that always escapes the listing.
+### In-class AI sessions
 
-> **We don't know which cardinality we are.**
+Show the mess, not just the result. I use AI live during lectures — let students see when it gets things wrong, how I redirect, when I accept versus push back. The truck story happened during one of these. Deliberately showing failure, the bad code, the hallucinated API, the "wait…" moments — that's the pedagogy. Students need to see the *process*, not polished outputs.
 
-[^diagonal]: The diagonal argument is also the template for Turing's halting problem proof (1936) and Gödel's incompleteness theorem (1931). Same deep structure: assume you can enumerate everything, construct something that escapes. It keeps showing up.
+### Directed dialogs
 
-## Multiple orders of random
+Scripted prompting exercises with specific learning goals. Start with "write a function to merge two sorted lists." See what the AI gives you cold. Read the code — does it handle edge cases? Empty lists? Tell the AI "that fails on [1,3] and [2]." Debug through dialog. Challenge it with duplicates. Students submit the full transcript. The conversation is the assignment.
 
-My sister coined the phrase "multiple orders of random" — patterns within patterns within patterns, each level organized by the level above it, no single layer capturing the whole.[^peyote]
+### Battling AIs
 
-![A cholla cactus skeleton — the lattice-within-lattice structure that caught my sister's eye. Each hole is unique, but the pattern of holes is organized, and the pattern of patterns is organized differently still. Multiple orders of random.](https://upload.wikimedia.org/wikipedia/commons/d/d6/RanchoPuntaSanCristobal07.JPG)
-*Cholla cactus skeleton. Photo: [Wikimedia Commons, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/Category:Cholla_Cactus_Garden). If you've never seen one in person, they're worth the trip.*
+The truck story as a method. One AI generates code or analysis. A different AI critiques it — finds errors, challenges assumptions, suggests improvements. The student is the judge. Who's right? This builds verification habits by making the student the arbiter between two confident, articulate, possibly-wrong systems.
 
-It describes human societies. People form families, families form communities, communities form nations. Each level generates dynamics that aren't derivable from the level below.[^anderson] An individual mind has fixed capacity. But culture — the collective, multi-generational thing — keeps growing, keeps generating new structure faster than any system can encode it. Nobody holds all of Western law, or all of mathematics, or all the social knowledge embedded in a language.
+### Submitted transcripts
 
-Maybe individual cognition is ℵ₀ too, and *culture* is ℵ₁. A model might converge on what any individual can do. But culture never converges because it keeps inventing new levels of organization, new kinds of games at scales we haven't seen. Park et al. put 25 LLM agents in a simulated town — they gossiped, formed relationships, organized a party.[^park] But the agents were simulating social behavior, not generating new social structures. They gossiped because GPT knows what gossip looks like, not because gossip emerged from first principles.
+In Visual Analytics, I'm planning: "Discuss this paper with an AI, then submit the conversation." The grading rubric is about quality of prompts, quality and originality of the analysis, and whether the student caught errors. The process becomes visible and assessable. This could work in any reading-heavy course.
 
-Nobody has seen multi-agent AI produce something that crossed a cardinality boundary.
+### Scaffolded coding quizzes
 
-[^peyote]: From her one and only peyote experience, decades ago, walking the Arizona desert. She was examining desiccated cholla cactus skeletons — ordered layers upon layers of seemingly random patterns, each level organized by the level above it. Some of the best ideas come from people paying attention to the wrong thing.
-[^anderson]: Philip Anderson, "[More Is Different](https://www.science.org/doi/10.1126/science.177.4047.393)," *Science*, 1972. At each level of complexity, fundamentally new properties appear that aren't deducible from below. Particle physics doesn't predict chemistry. Chemistry doesn't predict biology.
-[^park]: Park et al., "[Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442)," *UIST '23*, ACM, 2023.
+In-class, no-AI checkpoints that build toward AI-assisted work. The student proves they understand the concept on a quiz, *then* they get to use AI on the larger assignment. The quiz isn't punitive — it's the scaffold that makes the AI-assisted work meaningful. And proctored exams are still the top tool for face-to-face assessment. Ask about the homework.
 
-## Goals change everything
+### Per-assignment AI policy
 
-Here's the structural problem. Token prediction is reactive. It answers "what would come next?" It has no notion of *I'm trying to get somewhere*. There's no *there*.
+Default is "no AI," opened when it serves learning. The syllabus frames it: the goal is arriving at the solution, not the solution itself. And don't publish direct solutions — they end up in training data, and then they end up back in your students' submissions.[^laundering] The provenance problem runs in both directions.
 
-A goal is architecturally different. The system evaluates its distance from a target state. It can reject plausible continuations in favor of less obvious ones that serve the goal. It goes uphill against the likelihood gradient because it has a reason to.
 
-AlphaGo.[^alphago] It wasn't predicting the next move a human would play. It was evaluating board states against a goal — winning — and choosing moves that maximized its probability of getting there, even when the moves looked insane to experts. Move 37 against Lee Sedol: no human would play it, a token predictor trained on human games would assign it near-zero probability, and it was brilliant. The goal gave the system a reason to leave the distribution of human play and go somewhere new.
+## The column of A's
 
-But Go has a clean win condition. The board is observable. You can simulate millions of games. Try expanding the goal to "advance physics" or "maximize human flourishing." How do you write the loss function[^loss] for a unified field theory?
+Here's the thing I don't have an answer for.
 
-The interesting territory is in between: constrained domains with well-defined success criteria. Find room-temperature superconductors. Prove or disprove the Riemann hypothesis. Design a carbon capture process that works at scale. Each one is bounded, verifiable, enormously valuable — and too narrow for the objective to go sideways into paperclip[^paperclip] territory. The mistake in AI discourse is jumping to the godhood question when there's enormous value in bounded-goal territory we arguably already know how to build. We got distracted by the eschatology when the real work is giving AlphaGo a physics problem.
+![A gradebook from one of my courses. The "Total" column reads A, A-, A, A-, A, A, A, A. The callout says it: "No differentiation!"]({{ site.baseurl }}/assets/images/column-of-as.jpg)
 
-[^alphago]: Silver et al., "[Mastering the game of Go with deep neural networks and tree search](https://doi.org/10.1038/nature16961)," *Nature*, 2016. And then "[Mastering the game of Go without human knowledge](https://doi.org/10.1038/nature24270)," *Nature*, 2017 — AlphaGo Zero, which taught itself from scratch.
-[^loss]: A loss function tells a model what "wrong" looks like — the distance between prediction and correct answer. The model minimizes the loss. The problem: for the most interesting questions, we can't define "correct answer."
-[^paperclip]: Bostrom, *Superintelligence* (2014): an AI told to make paperclips might, if powerful enough and literal-minded enough, convert all matter in the universe into paperclips. It's probably wrong about how this plays out. But it's useful as a limit case.
+If students are more productive with AI — and they are — and they're turning in better work — and they are — then grades go up. I'm looking at a column of A's in some of my courses. Is that grade inflation? Or is it the new baseline? If a carpenter gets better tools, we don't give them a worse grade for using them. But if the tools are doing the carpentry...
 
-## Copy nature's homework
+I don't know. This is genuinely unsettled. If you have ideas, I want to hear them.
 
-Current AI has no mutation rate. Training optimizes for likelihood on existing data — selection pressure *against* the unexpected. It produces competent mediocrity reliably and genuine novelty rarely. Ken Stanley showed that rewarding *novelty* instead of fitness toward a fixed goal actually produces better solutions in many domains, because it avoids the local optima that optimization gets stuck in.[^stanley] His argument with Joel Lehman in *Why Greatness Cannot Be Planned* (2015) is that ambitious objectives are *harder* to reach when you aim at them directly — you need stepping stones you can't predict. Nature figured this out billions of years ago: thousands of poets write badly so one original voice emerges. But the money is going to making the token predictor better at commercial tasks. The novelty-search work, the bounded-goal scientific work, the architecturally different approaches — tiny fraction of the investment.
+## Where's this headed?
 
-[^stanley]: Lehman and Stanley, "[Abandoning Objectives: Evolution Through the Search for Novelty Alone](https://doi.org/10.1162/EVCO_a_00025)," *Evolutionary Computation*, 19(2), 2011. Stanley is currently SVP of Open-Endedness at Lila Sciences. His research agenda is one of the most interesting things in AI that the mainstream isn't paying attention to.
+The tools are getting better faster than our pedagogy. Agentic coding is already here — AI that writes, tests, and deploys its own code.[^agentic] What does "teach coding" even mean then?
 
-## The partnership
+The semester conversion is consuming all our oxygen at Seattle U right now — but this conversation can't wait until 2028. Whatever policy we set today may be obsolete by next quarter.
 
-So where does this leave us? I think the interesting near-term picture isn't AI replacing human thought. It's AI holding the ℵ₀ while humans contribute the ℵ₁.
+I don't have a unified theory. I have experiments, some principles I hold lightly, and a truck story. The truck story tells me this: the AI doesn't know what it doesn't know, and neither do you, unless you have the domain expertise to check. That means the domain expertise is more important than ever, not less.
 
-The model can only converge on what we've already thought. It's a magnificent mirror, but a mirror doesn't generate light. The genuine creative leaps — the things that add new structure rather than reorganize existing structure — might be the thing no amount of scaling produces.
+That's good news, if you're a teacher.
 
-That makes AI the most extraordinary *assistant* to human creativity that's ever existed. It holds the entire accumulated framework so a human thinker doesn't have to, freeing them to focus on the leap. A vast reference library with deep structural understanding, in service of a mind that can do the one thing it can't.
-
-That's a partnership, not a replacement. And frankly, it's a nicer future than the paperclip maximizer.
-
-## What I don't know
-
-I want to be honest: this is a metaphor, not a proof. Cantor's theorem is mathematically precise. The claim that cognition is a higher cardinality than token prediction is speculative. Maybe the gap is real. Maybe it's illusory and cognition is just a very elaborate ℵ₀ that feels transcendent from the inside. Penrose argued in *The Emperor's New Mind* (1989) that consciousness involves non-computable quantum processes — most people think he's wrong about the mechanism, but the intuition that something's being left out of the computational picture keeps coming back. I have days where I suspect I'm not even that complicated.
-
-But the framing clarifies the stakes. If it's a difference in degree, more scale gets us there eventually. If it's a difference in kind, no amount of parameters crosses the barrier. You'd need something architecturally different, and nobody knows what that looks like.
-
-Either way, the practical work is the same. Build bounded, goal-directed systems. Treat AI as a partner. Teach students to verify, to understand, to tell confident from correct.
-
-And maybe, along the way, find out which cardinality we actually are.
+[^agentic]: See, for example, Anthropic's Claude Code, Cursor, and similar tools that go beyond code completion into autonomous multi-step coding workflows. The capability gap between "autocomplete" and "autonomous agent" is closing fast.
 
 ## How this was made
 
-This started as a late-night conversation with Claude. I was poking at the convergence question and the one-dimensional feeling, and at some point I said "aleph-0 and aleph-1" — and that turned out to be the frame that made everything click. We chased the analogy for an hour through societies, AlphaGo, evolutionary biology, and whether culture is the higher infinity. It was genuinely productive, which is interesting evidence about the ℵ question, though I'm not sure which direction it points.
+This post started as two faculty talks — the truck talk in early March and a follow-up at the department meeting on March 19. I then sat down with Claude and said, roughly, "turn my talks into a blog post." The first draft was too philosophical and not concrete enough — it wanted to write an essay about principles when I wanted to write about things I'm actually doing. Several drafts later we got here. I rewrote a lot of it; Claude restructured a lot of it; we argued about tone. The usual.
 
-I asked Claude to turn the conversation into a blog post. The first draft was smooth and confident — the voice of someone who knows exactly what they think. I rewrote it to sound more like someone who had an interesting conversation and is still chewing on it.
+The recursion goes deeper: the March 19 slides were themselves built with Claude. The last slide before discussion shows me asking Claude to add a slide about using Claude to make the slides. That's what "Use It" looks like.
 
 ---
 
-*Kevin Lundeen is a teaching professor in the Department of Computer Science at Seattle University, where he teaches parallel computing, distributed systems, and AI systems. He is also VP of Software Engineering at OneTouchEMR. Previously, he was a managing director at Goldman Sachs, where he co-created SecDB (Goldman's trading and risk management system) and Slang (a proprietary language similar to Python). He is 66 years old and started programming with Fortran on punched cards, which means he has been watching computers get smarter for longer than most people reading this have been alive. He is not yet convinced they've caught up.*
+*Kevin Lundeen is a teaching professor in the Department of Computer Science at Seattle University, where he teaches parallel computing, distributed systems, computer networks, and AI systems. He is also VP of Software Engineering at OneTouchEMR, where he recently built AI clinical documentation features and learned that HIPAA compliance is not the most exciting reason to choose an AI vendor, but it is a valid one. Previously, he was a managing director at Goldman Sachs, where he co-created SecDB (Goldman's trading and risk management system) and Slang (a proprietary language similar to Python). He started programming with Fortran on punched cards in the late 1970s. The truck has been found. He is pretty sure there are more trucks.*
