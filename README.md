@@ -1,6 +1,6 @@
 # CS Perspectives
 
-Faculty blog for Seattle University's Department of Computer Science.
+[Proposed] Faculty blog for Seattle University's Department of Computer Science.
 
 ## Quick Start
 
