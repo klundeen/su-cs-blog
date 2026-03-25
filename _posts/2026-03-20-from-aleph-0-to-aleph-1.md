@@ -25,7 +25,7 @@ Here's where it gets interesting. There's a difference between *understanding* a
 
 So you'd hit a regime where the model has enough parameters to capture the patterns and reasoning structures — the framework — but runs out of room for the encyclopedia. It would understand entomology perfectly but not tell you about the specific beetle discovered on a Tuesday in 2847. This actually matches a real failure mode: I've watched Claude get the logic of an argument exactly right and hallucinate the citation. The relational knowledge compressed fine; the specific fact didn't survive.
 
-![A museum drawer of pinned beetle specimens. Each one is its own fact — unique, incompressible, irreducible to first principles. Understanding how beetles work compresses beautifully. Knowing which beetle this is does not.]({{ site.baseurl }}/assets/images/beetle-specimens.jpg)
+![A museum drawer of pinned beetle specimens. Each one is its own fact — unique, incompressible, irreducible to first principles. Understanding how beetles work compresses beautifully. Knowing which beetle this is does not.](https://upload.wikimedia.org/wikipedia/commons/a/af/Display_drawer_1a_%2817407586030%29.jpg)
 *"God has an inordinate fondness for beetles." — attributed to J.B.S. Haldane, probably apocryphal, definitely true. Photo: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Beetle_collections).*
 
 The practical answer is retrieval-augmented generation — don't memorize every beetle, learn how beetles work and look up the specific one when you need it. That's what we're building in my AI Systems course.[^rag]
@@ -80,7 +80,7 @@ Or maybe not. Maybe cognition just *feels* high-dimensional from the inside but 
 
 The phrase "multiple orders of random" isn't mine. It's my sister's, from her one and only peyote experience, decades ago, walking the Arizona desert. She was examining desiccated cactus skeletons — ordered layers upon layers of seemingly random patterns, each level organized by the level above it. Patterns within patterns within patterns. No single layer captures the whole.
 
-![A cholla cactus skeleton — the lattice-within-lattice structure that caught my sister's eye. Each hole is unique, but the pattern of holes is organized, and the pattern of patterns is organized differently still. Multiple orders of random.]({{ site.baseurl }}/assets/images/cholla-skeleton.jpg)
+![A cholla cactus skeleton — the lattice-within-lattice structure that caught my sister's eye. Each hole is unique, but the pattern of holes is organized, and the pattern of patterns is organized differently still. Multiple orders of random.](https://upload.wikimedia.org/wikipedia/commons/d/d6/RanchoPuntaSanCristobal07.JPG)
 *Cholla cactus skeleton. Photo: [Wikimedia Commons, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/Category:Cholla_Cactus_Garden). If you've never seen one in person, they're worth the trip.*
 
 I've always loved that image because it describes human societies. People form families. Families form clans. Clans form nations. Each level generates dynamics that aren't derivable from the level below.[^anderson] Knowing everything about individual psychology doesn't tell you how a family works. A diplomat negotiating a treaty is operating in a space shaped by personal psychology, family honor, tribal loyalty, national interest, and global economics all at once. And the levels interact — a single person's decision reshapes a family, shifts a community, tips an election, changes a nation's foreign policy.
