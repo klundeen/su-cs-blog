@@ -27,7 +27,7 @@ Longer posts that chase a question wherever it goes — the kind of thinking-out
 
 We are also building out the site itself to make contributing as frictionless as possible.
 
-**Done:** The [Post Composer]({{ '/compose/' | relative_url }}) lets you write a post with a live preview and export correctly formatted Jekyll Markdown — no Git required. The [How to Contribute]({{ '/contribute/' | relative_url }}) page explains three ways to submit (composer, Markdown, or just email a draft).
+**Done:** The [How to Contribute]({{ '/contribute/' | relative_url }}) page has everything you need: fork the repo, add a post to `_posts/`, open a PR. The [Post Composer]({{ '/compose/' | relative_url }}) is there for anyone who would rather skip Git — write with a live preview, copy the Markdown, and email it to Kevin.
 
 **Planned:** An AI writing assistant built into the composer. The idea is to let you ask an AI to help draft an opening paragraph, suggest section structure, or tighten your prose — all without leaving the tool. This requires a way to handle API credentials securely; we are exploring options including a lightweight proxy and bring-your-own-key. In the meantime, you can always draft with [Claude](https://claude.ai) or another AI tool and paste the result into the composer.
 
