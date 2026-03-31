@@ -1,0 +1,6 @@
+# IDE (JetBrains / Cursor)
+.idea/
+
+# Local archives and slide decks (not for version control)
+files.zip
+*.pptx

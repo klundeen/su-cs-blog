@@ -1,0 +1,298 @@
+---
+layout: default
+title: "Post Composer"
+permalink: /compose/
+---
+
+<style>
+  .composer-wrap { max-width: 800px; margin: 0 auto; }
+  .composer-wrap label { display: block; font-size: 0.75rem; font-weight: 600; color: #888;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; font-family: 'Montserrat', sans-serif; }
+  .composer-wrap input[type="text"],
+  .composer-wrap input[type="date"] {
+    width: 100%; padding: 7px 10px; border: 1px solid #ccc; border-radius: 4px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.9rem; box-sizing: border-box; color: #333; }
+  .composer-wrap textarea {
+    width: 100%; min-height: 300px; padding: 14px; border: 1px solid #ccc; border-radius: 6px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.88rem; line-height: 1.6; resize: vertical; box-sizing: border-box; color: #333; }
+  .field-row { display: grid; gap: 12px; margin-bottom: 12px; }
+  .field-row.two { grid-template-columns: 1fr 1fr; }
+  .field-row.wide-narrow { grid-template-columns: 2fr 1fr; }
+  .field-group { margin-bottom: 12px; }
+
+  .tabs { display: flex; gap: 0; border-bottom: 2px solid #eee; margin: 20px 0 0; }
+  .tabs button { padding: 8px 18px; cursor: pointer; font-family: 'Oswald', sans-serif; font-size: 0.88rem;
+    font-weight: 400; background: none; border: none; border-bottom: 3px solid transparent;
+    color: #888; margin-bottom: -2px; }
+  .tabs button.active { font-weight: 600; border-bottom-color: #AA0000; color: #AA0000; }
+
+  .tab-panel { display: none; padding: 16px 0; }
+  .tab-panel.active { display: block; }
+
+  /* Preview chrome */
+  .preview-chrome { background: #f9f8f6; border: 1px solid #e0ddd8; border-radius: 8px; overflow: hidden; }
+  .preview-topbar { background: #AA0000; padding: 6px 20px; font-size: 0.72rem; color: rgba(255,255,255,0.8); display: flex; gap: 16px; }
+  .preview-header { padding: 12px 24px; border-bottom: 1px solid #ddd; display: flex; align-items: baseline; justify-content: space-between; }
+  .preview-header .brand { font-family: 'Roboto Slab', serif; font-size: 0.85rem; color: #333; }
+  .preview-header .brand small { color: #888; font-size: 0.7rem; display: block; }
+  .preview-nav { display: flex; gap: 16px; font-size: 0.78rem; font-family: 'Montserrat', sans-serif; color: #666; }
+  .preview-nav .active-link { color: #AA0000; font-weight: 600; }
+  .preview-body { padding: 28px 32px 36px; background: #fff; }
+  .preview-meta { font-size: 0.78rem; color: #888; font-family: 'Montserrat', sans-serif; margin-bottom: 6px; }
+  .preview-title { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 600; color: #1a1a1a; margin: 0 0 4px; line-height: 1.2; }
+  .preview-subtitle { font-size: 1.05rem; color: #666; font-style: italic; margin: 0 0 20px; line-height: 1.5; }
+  .preview-content { font-family: 'Montserrat', sans-serif; font-size: 0.93rem; color: #333; line-height: 1.75; }
+  .preview-content h2 { font-family: 'Oswald', sans-serif; font-size: 1.35rem; color: #222; font-weight: 500; margin: 1.8em 0 0.6em; }
+  .preview-content h3 { font-family: 'Oswald', sans-serif; font-size: 1.15rem; color: #333; margin: 1.5em 0 0.5em; }
+  .preview-content blockquote { border-left: 3px solid #AA0000; margin: 1.2em 0; padding: 0.5em 1em; color: #555; font-style: italic; }
+  .preview-content pre { background: #f5f2f0; padding: 1em; border-radius: 4px; overflow-x: auto; font-size: 0.88em; line-height: 1.5; }
+  .preview-content code { background: #f5f2f0; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; }
+  .preview-content pre code { background: none; padding: 0; }
+  .preview-content a { color: #AA0000; }
+  .preview-content img { max-width: 100%; border-radius: 4px; margin: 1.2em 0; display: block; }
+  .preview-content p { margin: 0 0 1.2em; }
+  .preview-content hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+  .preview-author { margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee; }
+  .preview-author .name { font-family: 'Roboto Slab', serif; font-weight: 500; color: #333; }
+  .preview-author .atitle { font-size: 0.82rem; color: #888; }
+  .preview-placeholder { color: #aaa; font-style: italic; }
+
+  /* Markdown output */
+  .md-output-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .md-output-bar code { background: #f5f2f0; padding: 3px 8px; border-radius: 3px; font-size: 0.85rem; }
+  .md-output-bar .filename-label { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: #666; }
+  .copy-btn { padding: 8px 20px; background: #AA0000; color: #fff; border: none; border-radius: 4px;
+    font-family: 'Oswald', sans-serif; font-size: 0.88rem; cursor: pointer; transition: background 0.2s; }
+  .copy-btn.copied { background: #2a7c2a; }
+  .md-output pre { background: #f5f2f0; padding: 16px; border-radius: 6px; overflow: auto; max-height: 500px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.84rem; line-height: 1.55; color: #444; white-space: pre-wrap; border: 1px solid #e0ddd8; }
+  .md-output .instructions { font-size: 0.82rem; color: #888; margin-top: 10px; }
+  .md-output .instructions a { color: #AA0000; }
+  .md-output .instructions code { background: #f5f2f0; padding: 1px 4px; border-radius: 2px; }
+</style>
+
+<div class="composer-wrap">
+
+  <p style="font-size: 0.85rem; color: #888; margin: 0 0 20px;">
+    Write your blog post, preview it, and copy the formatted Markdown.
+    Then email it to <a href="mailto:lundeenk@seattleu.edu" style="color:#AA0000">Kevin</a> or add it to
+    <a href="https://github.com/klundeen/su-cs-blog" style="color:#AA0000">the repo</a>.
+  </p>
+
+  <!-- Metadata fields -->
+  <div class="field-row two">
+    <div><label for="c-author">Author</label><input type="text" id="c-author" placeholder="Your Name"></div>
+    <div><label for="c-author-title">Author Title</label><input type="text" id="c-author-title" placeholder="Associate Professor, Department of Computer Science"></div>
+  </div>
+  <div class="field-row wide-narrow">
+    <div><label for="c-title">Post Title</label><input type="text" id="c-title" placeholder="Your Post Title"></div>
+    <div><label for="c-date">Date</label><input type="date" id="c-date"></div>
+  </div>
+  <div class="field-group">
+    <label for="c-subtitle">Subtitle (optional)</label>
+    <input type="text" id="c-subtitle" placeholder="A short tagline or framing question">
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="active" data-tab="write">Write</button>
+    <button data-tab="preview">Preview</button>
+    <button data-tab="markdown">Markdown Output</button>
+  </div>
+
+  <!-- Write tab -->
+  <div class="tab-panel active" id="tab-write">
+    <textarea id="c-content" placeholder="Write your post content here in Markdown...
+
+## Section Heading
+
+Your text. Use **bold**, *italic*, [links](url), and ``` code blocks ```.
+
+> Blockquotes work too."></textarea>
+  </div>
+
+  <!-- Preview tab -->
+  <div class="tab-panel" id="tab-preview">
+    <div class="preview-chrome">
+      <div class="preview-topbar">
+        <span>Seattle University</span>
+        <span>College of Science &amp; Engineering</span>
+        <span>Computer Science</span>
+      </div>
+      <div class="preview-header">
+        <div class="brand"><small>Seattle University</small><strong>CS Perspectives</strong></div>
+        <div class="preview-nav">
+          <span>Posts</span><span>Roadmap</span><span>About</span><span class="active-link">Contribute</span>
+        </div>
+      </div>
+      <div class="preview-body">
+        <div class="preview-meta" id="preview-meta"></div>
+        <h1 class="preview-title" id="preview-title">Your Post Title</h1>
+        <p class="preview-subtitle" id="preview-subtitle" style="display:none;"></p>
+        <div class="preview-content" id="preview-content">
+          <p class="preview-placeholder">Your post content will appear here as you type...</p>
+        </div>
+        <div class="preview-author" id="preview-author" style="display:none;">
+          <div class="name" id="preview-author-name"></div>
+          <div class="atitle" id="preview-author-title"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Markdown output tab -->
+  <div class="tab-panel" id="tab-markdown">
+    <div class="md-output">
+      <div class="md-output-bar">
+        <div>
+          <span class="filename-label">Filename: </span>
+          <code id="md-filename"></code>
+        </div>
+        <button class="copy-btn" id="copy-btn" onclick="copyMarkdown()">Copy Markdown</button>
+      </div>
+      <pre id="md-output"></pre>
+      <p class="instructions">
+        Copy this and email it to <a href="mailto:lundeenk@seattleu.edu">lundeenk@seattleu.edu</a>,
+        or save it as <code id="md-filename2"></code> and add it to <code>_posts/</code> in
+        the <a href="https://github.com/klundeen/su-cs-blog">su-cs-blog</a> repo.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // Set default date to today
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('c-date').value = today;
+
+  // Tab switching
+  document.querySelectorAll('.tabs button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tabs button').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.getAttribute('data-tab')).classList.add('active');
+      updateAll();
+    });
+  });
+
+  // Live updates
+  ['c-author','c-author-title','c-title','c-subtitle','c-date','c-content'].forEach(function(id) {
+    document.getElementById(id).addEventListener('input', updateAll);
+  });
+
+  function val(id) { return document.getElementById(id).value; }
+
+  function slugify(t) {
+    return t.toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  }
+
+  function formatDate(d) {
+    try {
+      var dt = new Date(d + 'T12:00:00');
+      return dt.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    } catch(e) { return d; }
+  }
+
+  function generateMarkdown() {
+    var title = val('c-title') || 'Untitled';
+    var subtitle = val('c-subtitle').trim();
+    var date = val('c-date');
+    var author = val('c-author') || 'Your Name';
+    var authorTitle = val('c-author-title').trim();
+    var content = val('c-content');
+
+    var fm = '---\nlayout: post\ntitle: "' + title + '"';
+    if (subtitle) fm += '\nsubtitle: "' + subtitle + '"';
+    fm += '\ndate: ' + date;
+    fm += '\nauthor: ' + author;
+    if (authorTitle) fm += '\nauthor_title: "' + authorTitle + '"';
+    fm += '\n---\n\n' + content;
+    return fm;
+  }
+
+  function md2html(md) {
+    if (!md) return '';
+    var h = md
+      .replace(/```(\w*)\n([\s\S]*?)```/g, function(_, l, c) {
+        return '<pre><code>' + c.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</code></pre>';
+      })
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img alt="$1" src="$2" />')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+      .replace(/^---$/gm, '<hr />');
+
+    // Paragraphs
+    h = h.split('\n\n').map(function(p) {
+      var t = p.trim();
+      if (!t) return '';
+      if (/^<(h[2-3]|pre|blockquote|hr|img|ul|ol|div)/.test(t)) return t;
+      return '<p>' + t.replace(/\n/g,'<br/>') + '</p>';
+    }).join('\n');
+    return h;
+  }
+
+  function updateAll() {
+    var title = val('c-title') || 'Your Post Title';
+    var subtitle = val('c-subtitle').trim();
+    var date = val('c-date');
+    var author = val('c-author');
+    var authorTitle = val('c-author-title');
+    var content = val('c-content');
+    var slug = slugify(val('c-title') || 'untitled') || 'untitled';
+    var filename = date + '-' + slug + '.md';
+
+    // Preview
+    document.getElementById('preview-meta').textContent = formatDate(date) + ' · ' + (author || 'Author Name');
+    document.getElementById('preview-title').textContent = title;
+
+    var subEl = document.getElementById('preview-subtitle');
+    if (subtitle) { subEl.textContent = subtitle; subEl.style.display = 'block'; }
+    else { subEl.style.display = 'none'; }
+
+    var contentEl = document.getElementById('preview-content');
+    if (content.trim()) { contentEl.innerHTML = md2html(content); }
+    else { contentEl.innerHTML = '<p class="preview-placeholder">Your post content will appear here as you type...</p>'; }
+
+    var authorEl = document.getElementById('preview-author');
+    if (author) {
+      authorEl.style.display = 'block';
+      document.getElementById('preview-author-name').textContent = author;
+      document.getElementById('preview-author-title').textContent = authorTitle;
+    } else { authorEl.style.display = 'none'; }
+
+    // Markdown output
+    document.getElementById('md-filename').textContent = filename;
+    document.getElementById('md-filename2').textContent = filename;
+    document.getElementById('md-output').textContent = generateMarkdown();
+  }
+
+  // Copy
+  window.copyMarkdown = function() {
+    var md = generateMarkdown();
+    var btn = document.getElementById('copy-btn');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(md).then(function() {
+        btn.textContent = 'Copied!'; btn.classList.add('copied');
+        setTimeout(function() { btn.textContent = 'Copy Markdown'; btn.classList.remove('copied'); }, 2200);
+      });
+    } else {
+      var ta = document.createElement('textarea'); ta.value = md;
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      btn.textContent = 'Copied!'; btn.classList.add('copied');
+      setTimeout(function() { btn.textContent = 'Copy Markdown'; btn.classList.remove('copied'); }, 2200);
+    }
+  };
+
+  updateAll();
+})();
+</script>
