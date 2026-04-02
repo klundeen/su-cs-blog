@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.title { font-size: 15px; font-weight: 600; fill: #1a1a2e; }
+.label { font-size: 13px; fill: #555; }
+.math { font-size: 13px; fill: #333; font-style: italic; }
+.note { font-size: 12px; fill: #777; }
+.world-label { font-size: 14px; font-weight: 600; fill: #fff; }
+.edge-label { font-size: 12px; font-weight: 500; }
+</style>
+<defs>
+<marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1d9e75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534ab7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<text class="title" x="40" y="36">Your world (multiplicative)</text>
+<text class="note" x="40" y="56">Trip around a cycle: multiply all the weights</text>
+
+<rect x="80" y="80" width="110" height="44" rx="8" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.8"/>
+<text class="world-label" x="135" y="107" text-anchor="middle" fill="#085041">World A</text>
+<rect x="310" y="80" width="110" height="44" rx="8" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.8"/>
+<text class="world-label" x="365" y="107" text-anchor="middle" fill="#085041">World B</text>
+<rect x="540" y="80" width="110" height="44" rx="8" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.8"/>
+<text class="world-label" x="595" y="107" text-anchor="middle" fill="#085041">World C</text>
+
+<line x1="190" y1="95" x2="308" y2="95" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#a1)"/>
+<text class="edge-label" x="249" y="88" text-anchor="middle" fill="#0f6e56">&#xd7; 10</text>
+<line x1="420" y1="95" x2="538" y2="95" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#a1)"/>
+<text class="edge-label" x="479" y="88" text-anchor="middle" fill="#0f6e56">&#xd7; 1/20</text>
+<path d="M540 130 Q400 170 190 130" fill="none" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#a1)"/>
+<text class="edge-label" x="365" y="160" text-anchor="middle" fill="#0f6e56">&#xd7; 2</text>
+
+<text class="note" x="40" y="195">Product: 10 &#xd7; 1/20 &#xd7; 2 = 1.0 (no profit)</text>
+<text class="note" x="40" y="213">Want: product &gt; 1.0 (free magic!)</text>
+
+<line x1="40" y1="232" x2="760" y2="232" stroke="#ddd" stroke-width="0.5"/>
+
+<text class="title" x="40" y="262">Step 1: take log of each weight</text>
+<text class="note" x="40" y="282">log turns multiplication into addition</text>
+
+<rect x="80" y="300" width="110" height="44" rx="8" fill="#eeedfe" stroke="#534ab7" stroke-width="0.8"/>
+<text class="world-label" x="135" y="327" text-anchor="middle" fill="#26215c">World A</text>
+<rect x="310" y="300" width="110" height="44" rx="8" fill="#eeedfe" stroke="#534ab7" stroke-width="0.8"/>
+<text class="world-label" x="365" y="327" text-anchor="middle" fill="#26215c">World B</text>
+<rect x="540" y="300" width="110" height="44" rx="8" fill="#eeedfe" stroke="#534ab7" stroke-width="0.8"/>
+<text class="world-label" x="595" y="327" text-anchor="middle" fill="#26215c">World C</text>
+
+<line x1="190" y1="315" x2="308" y2="315" stroke="#534ab7" stroke-width="1.2" marker-end="url(#a2)"/>
+<text class="edge-label" x="249" y="308" text-anchor="middle" fill="#3c3489">log(10) = 2.3</text>
+<line x1="420" y1="315" x2="538" y2="315" stroke="#534ab7" stroke-width="1.2" marker-end="url(#a2)"/>
+<text class="edge-label" x="479" y="308" text-anchor="middle" fill="#3c3489">log(1/20) = &#x2212;3.0</text>
+<path d="M540 350 Q400 390 190 350" fill="none" stroke="#534ab7" stroke-width="1.2" marker-end="url(#a2)"/>
+<text class="edge-label" x="365" y="380" text-anchor="middle" fill="#3c3489">log(2) = 0.69</text>
+
+<text class="note" x="40" y="420">Sum: 2.3 + (&#x2212;3.0) + 0.69 = 0 (no profit)</text>
+<text class="note" x="40" y="438">Want: sum &gt; 0 (positive cycle)</text>
+
+<line x1="40" y1="456" x2="760" y2="456" stroke="#ddd" stroke-width="0.5"/>
+
+<text class="title" x="40" y="484">Step 2: negate the logs</text>
+<text class="note" x="40" y="504">"sum &gt; 0" becomes "sum &lt; 0" &#x2014; a negative cycle! Now Bellman-Ford can detect it.</text>
+</svg>

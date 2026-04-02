@@ -13,6 +13,8 @@ description: "A conversation with Claude about magic portals, negative cycles, a
 
 What follows is a conversation I had with Claude on a rainy afternoon. It started with a game world and ended at Goldman Sachs. I've lightly edited for spelling and grammar, but the arc is exactly how it happened. The labels are "Professor" and "Claude" throughout — no introduction, no framing. The conversation *is* the thing.
 
+![A wizard steps through a glowing portal between worlds. World A on the left, World B on the right, magic dust trailing from an outstretched wand.]({{ site.baseurl }}/assets/images/wizard-portal.svg)
+
 ---
 
 **Professor:** Imagine we have a game world. There's a portal from my world, World A, to a simpler world, World B. My magic quotient in my world is 1. But if I go through the portal to World B, I'm like a god there and my magic quotient is multiplied by 10. But when I return back to World A through the portal, my magic quotient is multiplied by 10%, the reciprocal, so I end up in my world as nothing special: magic quotient 1.0.
@@ -121,6 +123,8 @@ Bellman-Ford detects *negative*-sum cycles, not positive ones. No problem — ju
 
 Three steps: log, negate, Bellman-Ford. That's the whole trick.[^math]
 
+![The log transform: how multiplicative portal weights become additive graph weights that Bellman-Ford can digest.]({{ site.baseurl }}/assets/images/log-transform-diagram.svg)
+
 **Professor:** Nice! That's more than just a little bit clever, unless you're an algebraist, I guess. Who first came up with that idea, do we know?
 
 **Claude:** I can't pin down a single "eureka" moment or a single person. The log transform trick for converting multiplicative problems into additive ones is such a fundamental move in mathematics that it probably felt obvious to multiple people independently.
@@ -187,6 +191,9 @@ Which is still pretty ploddy. With, say, 150 currencies, that's on the order of 
 
 **Professor:** When I was at Goldman Sachs (in forex) we bought Hull, a high-speed trading company that did just that. We high-brow trading desks thought poorly of these poor mugs that were chasing milliseconds, presumably with Bellman-Ford.
 
+![A trading floor — rows of screens, blinking prices, and the controlled chaos of the forex market. Somewhere in here, Bellman-Ford is running on an FPGA, chasing negative cycles faster than the traders can blink.](https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/NYC_NYSE_img_0892.jpg/1280px-NYC_NYSE_img_0892.jpg)
+*The New York Stock Exchange trading floor. Photo: [Wikimedia Commons, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:NYC_NYSE_img_0892.jpg).*
+
 **Claude:** The irony of looking down on people who were essentially running a 1950s RAND Corporation algorithm really fast. Though I imagine from the perspective of a sophisticated trading desk, watching someone chase pennies around negative cycles at millisecond speeds felt a bit like watching someone use a supercomputer to count cards at blackjack.
 
 But there's a certain elegance to it, isn't there? No models to be wrong about, no views on where the market is going, no risk to speak of. Just pure graph theory and a fast pipe. The math guarantees the profit — the only question is whether you can execute before the cycle closes.
@@ -221,6 +228,9 @@ So: one forgotten, one legendary, one who lived a long and evidently delightful 
 
 **Professor:** When I got my graduate degree in 1986, they were all still, at least recently, around. I was building an "AI" Expert System, NEURON, that was, of course, working on a graph model of the motor neurons. Small world.
 
+![White matter fiber tracts of the human brain, visualized by diffusion MRI tractography. The brain is a graph — Shimbel was modeling these same structures in the 1940s.](https://upload.wikimedia.org/wikipedia/commons/f/f1/White_Matter_Connections_Obtained_with_MRI_Tractography.png)
+*White matter connections obtained with MRI tractography. Image: [Wikimedia Commons, public domain](https://commons.wikimedia.org/wiki/File:White_Matter_Connections_Obtained_with_MRI_Tractography.png). (I used a stunning gold-leaf version of this by [Greg Dunn](https://www.gregadunn.com) in my Visual Analytics lecture — permission request pending.)*
+
 **Claude:** That's a wonderful connection. In 1986, Bellman had just passed two years earlier, Ford was happily eating desserts in Santa Barbara, and Shimbel was still alive in Chicago with a year left. And there you were, working on a neural graph model that traced a direct line back to Shimbel's earliest work — those nerve-ganglion models from the late 1940s.
 
 It really is a small world. Shimbel started with graphs of neurons and accidentally invented a shortest-path algorithm. You started with graphs of neurons and ended up on a Goldman Sachs trading floor where people were using that same algorithm to chase negative cycles in forex markets. The graph connects everyone.
@@ -235,14 +245,10 @@ And UDP is the perfect choice for this context, isn't it? You don't want the ove
 
 ## The assignment
 
-I assign this problem every year in CPSC 5520, Distributed Systems.[^5520] The students build a subscriber that listens for forex price quotes over UDP, maintains a graph of exchange rates, and runs Bellman-Ford after every update to detect arbitrage. It's pub-sub architecture, wire protocol parsing, stale data handling, out-of-order message detection, and graph algorithms — all in one lab.
-
-The sample output is the best part. When an arbitrage cycle appears, the program traces through the trades: start with USD 100, exchange for GBP, exchange for CAD, exchange for AUD, exchange back to USD — and if the final number is more than 100, you've found free money. When the rates shift and the cycle closes, the program moves on. When a quote goes stale (1.5 seconds without an update), it gets removed. When a quote arrives out of order (timestamp earlier than the latest seen for that market), it gets ignored. The messiness of real distributed systems, right there in the log.
-
-The full assignment is reproduced below. Prospective students: this is what graduate CS looks like at Seattle U. Come find some negative cycles.
+I assign this every year in CPSC 5520, Distributed Systems.[^5520] Pub-sub architecture, wire protocol parsing, stale data handling, out-of-order UDP messages, and Bellman-Ford — all in one lab. An excerpt from the assignment is reproduced below. Prospective students: this is what graduate CS looks like at Seattle U. Come find some negative cycles.
 
 <details>
-<summary><strong>Lab 3: Detecting Arbitrage Opportunities Using Published Quotes</strong> — <em>click to expand the full assignment</em></summary>
+<summary><strong>Lab 3: Detecting Arbitrage Opportunities Using Published Quotes</strong> — <em>click to expand an excerpt from the full assignment</em></summary>
 
 <div style="margin-top: 1em; padding: 1.5em; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 0.92em; line-height: 1.7;">
 
@@ -302,38 +308,36 @@ The full assignment is reproduced below. Prospective students: this is what grad
 
 <h4>Sample Log</h4>
 
-<pre style="background: #f0f0ed; padding: 12px; border-radius: 4px; font-size: 0.85em; overflow-x: auto; line-height: 1.5;">
-2019-10-14 23:58:30.188639 AUD USD 0.75035
-2019-10-14 23:58:30.188639 USD CHF 1.0016
-2019-10-14 23:58:30.188639 USD JPY 100.04957
-2019-10-14 23:58:30.188639 EUR USD 1.1002
-2019-10-14 23:58:30.188639 GBP USD 1.2516
-2019-10-14 23:58:17.274142 GBP USD 1.25162
-ignoring out-of-sequence message
-2019-10-14 23:58:31.194879 AUD CAD 0.30038
-2019-10-14 23:58:31.194879 CAD GBP 1.20153
-ARBITRAGE:
-    start with USD 100
-    exchange USD for GBP at 0.7990 --> GBP 79.90
-    exchange GBP for CAD at 0.8323 --> CAD 66.50
-    exchange CAD for AUD at 3.3291 --> AUD 221.37
-    exchange AUD for USD at 0.75035 --> USD 166.11
+<pre style="background: #1e1e1e; color: #d4d4d4; padding: 14px 16px; border-radius: 6px; font-size: 0.82em; overflow-x: auto; line-height: 1.6;"><span style="color: #808080;">2019-10-14 23:58:30.188639</span> AUD USD 0.75035
+<span style="color: #808080;">2019-10-14 23:58:30.188639</span> USD CHF 1.0016
+<span style="color: #808080;">2019-10-14 23:58:30.188639</span> USD JPY 100.04957
+<span style="color: #808080;">2019-10-14 23:58:30.188639</span> EUR USD 1.1002
+<span style="color: #808080;">2019-10-14 23:58:30.188639</span> GBP USD 1.2516
+<span style="color: #808080;">2019-10-14 23:58:17.274142</span> GBP USD 1.25162
+<span style="color: #e06c75;">ignoring out-of-sequence message</span>
+<span style="color: #808080;">2019-10-14 23:58:31.194879</span> AUD CAD 0.30038
+<span style="color: #808080;">2019-10-14 23:58:31.194879</span> CAD GBP 1.20153
+<span style="color: #98c379; font-weight: bold;">ARBITRAGE:</span>
+<span style="color: #98c379;">    start with USD 100
+    exchange USD for GBP at 0.7990 --&gt; GBP 79.90
+    exchange GBP for CAD at 0.8323 --&gt; CAD 66.50
+    exchange CAD for AUD at 3.3291 --&gt; AUD 221.37
+    exchange AUD for USD at 0.75035 --&gt; USD 166.11</span>
 
-removing stale quote for ('USD', 'CHF')
-2019-10-14 23:58:34.208859 AUD JPY 73.73181
-ARBITRAGE:
-    start with USD 100
-    exchange USD for JPY at 100.081 --> JPY 10008.10
-    exchange JPY for AUD at 0.01356 --> AUD 135.74
-    exchange AUD for USD at 0.75049 --> USD 101.87
+<span style="color: #d19a66;">removing stale quote for ('USD', 'CHF')</span>
+<span style="color: #808080;">2019-10-14 23:58:34.208859</span> AUD JPY 73.73181
+<span style="color: #98c379; font-weight: bold;">ARBITRAGE:</span>
+<span style="color: #98c379;">    start with USD 100
+    exchange USD for JPY at 100.081 --&gt; JPY 10008.10
+    exchange JPY for AUD at 0.01356 --&gt; AUD 135.74
+    exchange AUD for USD at 0.75049 --&gt; USD 101.87</span>
 
-2019-10-14 23:58:35.213679 CHF EUR 0.90945
-ARBITRAGE:
-    start with USD 100
-    exchange USD for CHF at 1.0016 --> CHF 100.16
-    exchange CHF for EUR at 0.9095 --> EUR 91.09
-    exchange EUR for USD at 1.10048 --> USD 100.24
-</pre>
+<span style="color: #808080;">2019-10-14 23:58:35.213679</span> CHF EUR 0.90945
+<span style="color: #98c379; font-weight: bold;">ARBITRAGE:</span>
+<span style="color: #98c379;">    start with USD 100
+    exchange USD for CHF at 1.0016 --&gt; CHF 100.16
+    exchange CHF for EUR at 0.9095 --&gt; EUR 91.09
+    exchange EUR for USD at 1.10048 --&gt; USD 100.24</span></pre>
 
 </div>
 </details>
@@ -348,7 +352,7 @@ The conversation is lightly edited for grammar and flow, but the structure and c
 
 ---
 
-*Kevin Lundeen is a teaching professor in the Department of Computer Science at Seattle University, where he teaches distributed systems, parallel computing, computer networks, and AI systems. He is also VP of Software Engineering at OneTouchEMR. Previously, he was a managing director at Goldman Sachs, where he co-created SecDB and Slang, and where his forex desk once looked down on the very algorithm he now assigns as homework. He built his first neural network graph model in 1986 on a VAX. The graph connects everyone.*
+*Kevin Lundeen is a teaching professor in the Department of Computer Science at Seattle University, where he teaches distributed systems, parallel computing, computer networks, and AI systems. He is also VP of Software Engineering at OneTouchEMR. Previously, he was a managing director at Goldman Sachs, where he co-created SecDB and Slang, and where his forex desk once looked down on the very algorithm he now assigns as homework. He built his first neural network graph model in 1986 on a VAX. He is still looking for negative cycles.*
 
 [^math]: The formal derivation: we want ∏ mᵢⱼ > 1. Take logs: ∑ log(mᵢⱼ) > 0. Negate: ∑ (−log(mᵢⱼ)) < 0. Set wᵢⱼ = −log(mᵢⱼ) and run Bellman-Ford. A negative cycle in the w-weights corresponds to a profitable cycle in the original multipliers.
 
