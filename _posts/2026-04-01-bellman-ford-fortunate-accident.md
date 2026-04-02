@@ -13,7 +13,8 @@ description: "A conversation with Claude about magic portals, negative cycles, a
 
 What follows is a conversation I had with Claude on a rainy afternoon. It started with a game world and ended at Goldman Sachs. I've lightly edited for spelling and grammar, but the arc is exactly how it happened. The labels are "Professor" and "Claude" throughout — no introduction, no framing. The conversation *is* the thing.
 
-![A wizard steps through a glowing portal between worlds. World A on the left, World B on the right, magic dust trailing from an outstretched wand.]({{ site.baseurl }}/assets/images/wizard-portal.svg)
+![Ray Bolger as the Scarecrow in The Wizard of Oz (1939). He wanted a brain. Bellman and Ford could have given him a shortest path to one.](https://upload.wikimedia.org/wikipedia/commons/e/ea/The_Wizard_of_Oz_Ray_Bolger_1939.jpg)
+*Ray Bolger as the Scarecrow, 1939. He wanted a brain. Bellman and Ford could have given him a shortest path to one. Photo: [Wikimedia Commons, public domain](https://commons.wikimedia.org/wiki/File:The_Wizard_of_Oz_Ray_Bolger_1939.jpg).*
 
 ---
 
@@ -191,8 +192,8 @@ Which is still pretty ploddy. With, say, 150 currencies, that's on the order of 
 
 **Professor:** When I was at Goldman Sachs (in forex) we bought Hull, a high-speed trading company that did just that. We high-brow trading desks thought poorly of these poor mugs that were chasing milliseconds, presumably with Bellman-Ford.
 
-![A trading floor — rows of screens, blinking prices, and the controlled chaos of the forex market. Somewhere in here, Bellman-Ford is running on an FPGA, chasing negative cycles faster than the traders can blink.](https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/NYC_NYSE_img_0892.jpg/1280px-NYC_NYSE_img_0892.jpg)
-*The New York Stock Exchange trading floor. Photo: [Wikimedia Commons, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:NYC_NYSE_img_0892.jpg).*
+![A trading desk — rows of screens, blinking prices, and the controlled chaos of the markets. Somewhere in a room like this, Bellman-Ford is running on an FPGA, chasing negative cycles faster than the traders can blink.](https://upload.wikimedia.org/wikipedia/commons/8/86/A1_Houston_Office_Oil_Traders_on_Monday.jpg)
+*A trading floor in action. Photo: [Wikimedia Commons, CC BY-SA 2.0](https://commons.wikimedia.org/wiki/File:A1_Houston_Office_Oil_Traders_on_Monday.jpg).*
 
 **Claude:** The irony of looking down on people who were essentially running a 1950s RAND Corporation algorithm really fast. Though I imagine from the perspective of a sophisticated trading desk, watching someone chase pennies around negative cycles at millisecond speeds felt a bit like watching someone use a supercomputer to count cards at blackjack.
 
@@ -228,8 +229,8 @@ So: one forgotten, one legendary, one who lived a long and evidently delightful 
 
 **Professor:** When I got my graduate degree in 1986, they were all still, at least recently, around. I was building an "AI" Expert System, NEURON, that was, of course, working on a graph model of the motor neurons. Small world.
 
-![White matter fiber tracts of the human brain, visualized by diffusion MRI tractography. The brain is a graph — Shimbel was modeling these same structures in the 1940s.](https://upload.wikimedia.org/wikipedia/commons/f/f1/White_Matter_Connections_Obtained_with_MRI_Tractography.png)
-*White matter connections obtained with MRI tractography. Image: [Wikimedia Commons, public domain](https://commons.wikimedia.org/wiki/File:White_Matter_Connections_Obtained_with_MRI_Tractography.png). (I used a stunning gold-leaf version of this by [Greg Dunn](https://www.gregadunn.com) in my Visual Analytics lecture — permission request pending.)*
+![A network representation of brain connectivity — the brain as a graph. Shimbel was modeling these same structures in the 1940s.](https://upload.wikimedia.org/wikipedia/commons/c/c5/Network_representation_of_brain_connectivity.JPG)
+*The brain, rendered as a graph. Shimbel would have recognized it immediately. Image: [Wikimedia Commons, CC BY 2.5](https://commons.wikimedia.org/wiki/File:Network_representation_of_brain_connectivity.JPG). (I used a stunning gold-leaf version by [Greg Dunn](https://www.gregadunn.com) in my Visual Analytics lecture — permission request pending.)*
 
 **Claude:** That's a wonderful connection. In 1986, Bellman had just passed two years earlier, Ford was happily eating desserts in Santa Barbara, and Shimbel was still alive in Chicago with a year left. And there you were, working on a neural graph model that traced a direct line back to Shimbel's earliest work — those nerve-ganglion models from the late 1940s.
 
