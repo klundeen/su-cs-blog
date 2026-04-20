@@ -9,12 +9,13 @@ author_title: "Teaching Professor, Department of Computer Science"
 
 Anil Dash wrote a line in the *Times* a few weeks back that I keep coming back to: in creative fields, LLMs take away the soulful parts and leave the drudgery; in coding, they take away the drudgery and leave the soulful parts to you. We're on the lucky side of that deal. Our students need to be, too. This is fun!
 
-That's the stance underneath this post. I've been 
-having more fun teaching CS in the 
-last year than I've had in a while, and 
-more fun practicing it on the OneTouchEMR 
-side of my life. Figuring out how to 
-share that with students (not just the tools, the stance) is the work I'm trying to do. One of the stretch goals of that work is a short book, tentatively, on teaching and practicing software in the age of generative AI, from the dual vantage of graduate systems teaching and small-company engineering. I don't know yet whether the book will happen. But the working outline I've been drafting seems as good a scaffolding as any for a reading list on recent art in the field.
+![A drawer in the Indiana State Library card catalog, headings Lover through Luma. Every reading list is a smaller version of this—someone's ordering of a pile too big to hold in your head.](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg/1280px-Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg){:.float-right}
+
+That's the stance underneath this post. I've been having more fun teaching CS in the last year than I've had in a while, and more fun practicing it on the OneTouchEMR side of my life. Figuring out how to share that with students (not just the tools, the stance) is the work I'm trying to do. One of the stretch goals of that work is a short book, tentatively, on teaching and practicing software in the age of generative AI, from the dual vantage of graduate systems teaching and small-company engineering. I don't know yet whether the book will happen.
+
+If you're writing a book, it'd probably be a good idea to do the research first, right? Not only the book, but my actual teaching in the AI age deserves some research, too, obviously. I'm always reminding my students to look at prior art and training them to do that, so I should practice what I preach. Turns out the computing-education research community has produced an enormous volume of work since late 2022!
+
+So that's what this post is: the recent work I've set out to read. The working outline of the book is as good a scaffolding as any for organizing a reading list. I spent a lot of time with Claude figuring out this list. Most of the references and initial annotations came from Claude's searches, and deciding what to include and exclude was a back-and-forth. As I actually read what's here, I'll see what's missing from Claude's searching that my own reading should have caught. I have some musings, too, in the what's missing section.
 
 **Contents**
 
@@ -25,23 +26,18 @@ share that with students (not just the tools, the stance) is the work I'm trying
 - [Part V. Program Design, and Honest Uncertainty](#part-v-program-design-and-honest-uncertainty)
 - [What's missing, and why](#whats-missing-and-why)
 
-So that's what this post is. The recent work I'm reading, grouped under my tentative chapter headings. Three to six works per section, lightly annotated, weighted heavily toward 2024-2026.
+There are three to six works per section, lightly annotated, weighted heavily toward 2024-2026.
+I've tried to pick the pieces Claude flagged as highly cited. Where an industry or practitioner piece has reshaped the conversation more than any paper, I've included it. These are especially relevant in my Part II on current practices in industry.
 
-A note on what's here and what isn't. The computing-education research community seems to have produced an enormous volume of work since late 2022. I've tried to pick the pieces that have become reference points (the ones everyone else cites) rather than the ones I might agree with most. Where an industry or practitioner piece has reshaped the conversation more than any paper, it's in.
+Some well-known references repeat across sections. Ethan Mollick on the general question of working with AI, the Denny/Prather/MacNeil/Becker constellation on CS ed specifically. I won't re-annotate them each time.
 
-The usual suspects will repeat. Ethan Mollick on the general question of working with AI, the Denny/Prather/MacNeil/Becker constellation on CS ed specifically. I'll resist re-annotating them each time.
-
-To be clear about what this list is and isn't: I haven't read all of it yet. Some I have, especially the books in Parts I and IV. A lot of the academic papers and industry pieces I've picked based on a literature search, citation patterns, and a sense of what the field seems to be pointing at. The annotations reflect why I think each piece is worth reading, not a verdict after reading. The post is the reading list I'm working through. A future post might be the verdicts.
-
-The most useful section for you might be the ["What's missing, and why"](#whats-missing-and-why) part at the bottom, where I name the gaps. If you know work I should be reading, that's where the conversation is most open.
-
-![A drawer in the Indiana State Library card catalog, headings Lover through Luma. Every reading list is a smaller version of this — someone's ordering of a pile too big to hold in your head.](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg/1280px-Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg)
+There's plenty of material in here about how AI is harming productivity and tech debt. The industry seems to be going full bore anyway as am I, but it's good for a more balanced view.
 
 ---
 
 ## Part I. Epistle
 
-Short by design. Enough to set the vantage and the central claim: much of the "how" of software becomes cheaper with AI, and what remains load-bearing is human judgment, taste, accountability, and competence in off-distribution territory. These pieces frame that claim without overclaiming either way.
+Short by design. Enough to set the vantage and the central claim: much of the "how" of software becomes cheaper with AI, and what remains interesting is human judgment, taste, accountability, and competence in off-distribution territory. These pieces frame that claim without overclaiming either way.
 
 - Dash, A. (2026, March 13). [What Do Coders Do After AI?](https://www.anildash.com/2026/03/13/coders-after-ai/) *New York Times Magazine*. The essay this whole post takes its stance from. Dash's observation that coding may be one of the lucky creative domains, where AI takes the drudgery and leaves the soulful parts, is the most generative single line I've read on this topic in a year. This can be read in a single sitting.
 
@@ -143,7 +139,7 @@ The readings below are lighter on dispositional pedagogy and the craft-tradition
 
 ### On the off-distribution thesis, lightly
 
-- The METR paper and the Sloan piece on legacy systems (both cited in Part II above) work here too. The weird-code argument is really those findings generalized: AI is strongest on conventional code; our curricular edge is the un-conventional.
+- The METR paper and the Sloan piece on legacy systems (both cited in Part II above) work here too. The weird-code argument is really those findings generalized: AI is strongest on conventional code; our curricular edge is the unconventional.
 
 ---
 
@@ -176,12 +172,6 @@ This list isn't comprehensive in several places, and I want to name the gaps:
 - **The meta-literature.** I've deliberately excluded most of the systematic reviews of systematic reviews because they add little over Prather et al. 2023. May be a mistake if the field stabilizes in the next year.
 
 Whether or not the book happens, the reading list gets better the more eyes are on it. Send me yours.
-
----
-
-## How this was made
-
-The outline came out of a working session with Claude in mid-April, pressure-testing whether a book on CS ed in the age of AI had a shape worth building out. The reading list didn't exist until this week. Claude did the searches, proposed annotations, and drafted structure. I pushed back on what was too formal, added the aesthetics material for Part IV, and rewrote the framing in my own voice. Links were verified during drafting; any that break on you are on me.
 
 ---
 

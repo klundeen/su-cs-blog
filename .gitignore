@@ -1,6 +1,12 @@
 # IDE (JetBrains / Cursor)
 .idea/
 
+# Obsidian vault config
+.obsidian/
+
+# macOS
+.DS_Store
+
 # Local archives and slide decks (not for version control)
 files.zip
 *.pptx
