@@ -26,7 +26,7 @@ To be clear about what this list is and isn't: I haven't read all of it yet. Som
 
 The most useful section for you might be the ["What's missing, and why"](#whats-missing-and-why) part at the bottom, where I name the gaps. If you know work I should be reading, that's where the conversation is most open.
 
-![A drawer in the Indiana State Library card catalog, headings Lover through Luma. Every reading list is a smaller version of this — someone's ordering of a pile too big to hold in your head.](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg/1024px-Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg)
+![A drawer in the Indiana State Library card catalog, headings Lover through Luma. Every reading list is a smaller version of this — someone's ordering of a pile too big to hold in your head.](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg/1280px-Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg)
 
 **Contents**
 
