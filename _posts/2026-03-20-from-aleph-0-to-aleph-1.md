@@ -25,7 +25,7 @@ Here's where it gets interesting. There's a difference between *understanding* a
 
 So you'd hit a regime where the model has enough parameters to capture the patterns and reasoning structures — the framework — but runs out of room for the encyclopedia. It would understand entomology perfectly but not tell you about the specific beetle discovered on a Tuesday in 2847. This actually matches a real failure mode: I've watched Claude get the logic of an argument exactly right and hallucinate the citation. The relational knowledge compressed fine; the specific fact didn't survive.
 
-![A museum drawer of pinned beetle specimens. Each one is its own fact — unique, incompressible, irreducible to first principles. Understanding how beetles work compresses beautifully. Knowing which beetle this is does not.](https://upload.wikimedia.org/wikipedia/commons/a/af/Display_drawer_1a_%2817407586030%29.jpg)
+![A museum drawer of pinned beetle specimens. Each one is its own fact — unique, incompressible, irreducible to first principles. Understanding how beetles work compresses beautifully. Knowing which beetle this is does not.](https://upload.wikimedia.org/wikipedia/commons/a/af/Display_drawer_1a_%2817407586030%29.jpg){:.float-right}
 *"God has an inordinate fondness for beetles." — attributed to J.B.S. Haldane, probably apocryphal, definitely true. Photo: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Beetle_collections).*
 
 The practical answer is retrieval-augmented generation — don't memorize every beetle, learn how beetles work and look up the specific one when you need it. That's what we're building in my AI Systems course.[^rag]
@@ -76,7 +76,7 @@ Maybe cognition has that property. For any sequential description of what a mind
 
 My sister coined the phrase "multiple orders of random" — patterns within patterns within patterns, each level organized by the level above it, no single layer capturing the whole.[^peyote]
 
-![A cactus skeleton — the lattice-within-lattice structure that caught my sister's eye. Each hole is unique, but the pattern of holes is organized, and the pattern of patterns is organized differently still. Multiple orders of random.](https://upload.wikimedia.org/wikipedia/commons/d/d6/RanchoPuntaSanCristobal07.JPG)
+![A cactus skeleton — the lattice-within-lattice structure that caught my sister's eye. Each hole is unique, but the pattern of holes is organized, and the pattern of patterns is organized differently still. Multiple orders of random.](https://upload.wikimedia.org/wikipedia/commons/d/d6/RanchoPuntaSanCristobal07.JPG){:.float-right}
 *Cactus skeleton. Photo: [Wikimedia Commons, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/Category:Cholla_Cactus_Garden). If you've never seen one in person, they're worth the trip.*
 
 It describes human societies. People form families, families form communities, communities form nations. Each level generates dynamics that aren't derivable from the level below.[^anderson] An individual mind has fixed capacity. But culture — the collective, multi-generational thing — keeps growing, keeps generating new structure faster than any system can encode it. Nobody holds all of Western law, or all of mathematics, or all the social knowledge embedded in a language.
