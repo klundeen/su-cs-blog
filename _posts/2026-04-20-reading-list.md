@@ -16,6 +16,15 @@ more fun practicing it on the OneTouchEMR
 side of my life. Figuring out how to 
 share that with students (not just the tools, the stance) is the work I'm trying to do. One of the stretch goals of that work is a short book, tentatively, on teaching and practicing software in the age of generative AI, from the dual vantage of graduate systems teaching and small-company engineering. I don't know yet whether the book will happen. But the working outline I've been drafting seems as good a scaffolding as any for a reading list on recent art in the field.
 
+**Contents**
+
+- [Part I. Epistle](#part-i-epistle)
+- [Part II. Industry and Students](#part-ii-industry-and-students)
+- [Part III. The Four Domains as Preparation](#part-iii-the-four-domains-as-preparation)
+- [Part IV. The Practitioner's Stance](#part-iv-the-practitioners-stance)
+- [Part V. Program Design, and Honest Uncertainty](#part-v-program-design-and-honest-uncertainty)
+- [What's missing, and why](#whats-missing-and-why)
+
 So that's what this post is. The recent work I'm reading, grouped under my tentative chapter headings. Three to six works per section, lightly annotated, weighted heavily toward 2024-2026.
 
 A note on what's here and what isn't. The computing-education research community seems to have produced an enormous volume of work since late 2022. I've tried to pick the pieces that have become reference points (the ones everyone else cites) rather than the ones I might agree with most. Where an industry or practitioner piece has reshaped the conversation more than any paper, it's in.
@@ -27,15 +36,6 @@ To be clear about what this list is and isn't: I haven't read all of it yet. Som
 The most useful section for you might be the ["What's missing, and why"](#whats-missing-and-why) part at the bottom, where I name the gaps. If you know work I should be reading, that's where the conversation is most open.
 
 ![A drawer in the Indiana State Library card catalog, headings Lover through Luma. Every reading list is a smaller version of this — someone's ordering of a pile too big to hold in your head.](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg/1280px-Card_catalog_at_the_Indiana_State_Library_-_headings_Lover_through_Luma.jpg)
-
-**Contents**
-
-- [Part I. Epistle](#part-i-epistle)
-- [Part II. Industry and Students](#part-ii-industry-and-students)
-- [Part III. The Four Domains as Preparation](#part-iii-the-four-domains-as-preparation)
-- [Part IV. The Practitioner's Stance](#part-iv-the-practitioners-stance)
-- [Part V. Program Design, and Honest Uncertainty](#part-v-program-design-and-honest-uncertainty)
-- [What's missing, and why](#whats-missing-and-why)
 
 ---
 
