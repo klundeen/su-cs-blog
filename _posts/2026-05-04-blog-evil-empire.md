@@ -7,8 +7,6 @@ author: Kevin Lundeen
 author_title: "Teaching Professor, Department of Computer Science"
 ---
 
-*A Visual Analytics in-class exercise, designed in a Monday-night session and runnable inside a class meeting, only because the AI is doing real work on both sides*
-
 ![The bump chart students will build tomorrow, generated from the synthetic dataset. Lower rank means closer to the evil-empire title.]({{ site.baseurl }}/assets/images/evil_empire_bump_chart.png)
 
 Tomorrow my Visual Analytics students walk into an in-class exercise called *Who's the Evil Empire Now?* They'll work in groups, build a bump chart of six tech giants across thirty years, then peel off and each profile one company in depth. Perception against financials. Cross-examination at the end. The exercise scaffolds Saturday's midterm.
